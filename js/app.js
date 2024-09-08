@@ -47,7 +47,8 @@ async function newgame() {
         for (let i = 0; i < 52; i++) {
             let tmp_num = test_draw.cards[i].code.charAt(0);
             let tmp_type = test_draw.cards[i].code.charAt(1);
-            // console.log(kind + "\n" + imgurl);
+            let imgurl = test_draw.cards[i].image;
+            console.log(tmp_num + "\n" + imgurl);
             // console.log(test_draw.cards[i].code.charAt(0));
             // console.log(test_draw.cards[i].code.charAt(1));
 
@@ -74,13 +75,13 @@ async function newgame() {
                         break;
                 }
 
-                cpu_deck[cpu_cnt] = new Card(tmp_type, tmp_num, test_draw.cards[i].image);
+                cpu_deck[cpu_cnt] = new Card(tmp_type , tmp_num , imgurl);
                 cpu_cnt++;
                 // console.log(test_draw.cards[i].code.charAt(0));
             } else {
-                player_deck[player_cnt] = new Card(tmp_type, tmp_num, test_draw.cards[i].image);
-                console.log(player_deck[player_cnt]);
-                console.log(player_cnt);
+                player_deck[player_cnt] = new Card(tmp_type , tmp_num , imgurl);
+                // console.log(player_deck[player_cnt]);
+                // console.log(player_cnt);
                 player_cnt++;
             }
 
@@ -90,10 +91,18 @@ async function newgame() {
         console.error("Error fetching data:", error);
     }
 
+    console.log(player_deck[0]);
 
     //手札４枚出す
+    const player_cards = document.getElementById("player_cards");
     for (let i = 0; i < 4; i++) {
-        draw_card();
+        console.log(player_deck[i]);
+        console.log(player_deck[i].num + " " + player_deck[i].type + "\n" + player_deck[i].imagelink);
+        //imgタグ生成
+        const image = document.createElement("img");
+        image.src = player_deck[i].imagelink;
+        player_cards.appendChild(image);
+        // draw_card();
     }
 
     //敵カード絵札Aチェック
