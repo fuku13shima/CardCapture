@@ -11,6 +11,8 @@ body {
 
 .main{
   display:flex;
+    justify-content: center;
+
 }
 
 button{
@@ -24,13 +26,6 @@ button{
 .player_cards{
   justify-content: center;
 }
-
-.0{
-  width: 120px;
-  height: 50px;
-  
-}
-
 
 
 

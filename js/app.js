@@ -107,6 +107,9 @@ async function newgame() {
         //imgタグ生成
         const image = document.createElement("img");
         image.setAttribute('id' , player_deck[i].cards_id);
+        image.setAttribute('class' , i);
+        image.style.width = "120px";  // 幅を300pxに変更
+        image.style.height = "200px"; // 高さを300pxに変更
         image.src = player_deck[i].imglink;
         player_cards.appendChild(image);
         player_deck.shift();
