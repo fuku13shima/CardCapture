@@ -114,6 +114,8 @@ async function newgame() {
 
         image.addEventListener('click',  (e) =>{
             console.log(e.target.id);
+            const click_card = e.target.id;
+            click_card.style.background_ = 'green';
         })
     }
 
