@@ -22,6 +22,11 @@ let cpu_hand_cards = [];
 //プレイヤー山札 , プレイヤー手札配列
 let player_deck = [];
 let player_hand_cards = [];
+//プレイヤー合計値
+let player_sum = 0;
+
+let click_cards = [];
+let click_cnt = 0;
 
 //各フラグ（
 let win_flg = false;
@@ -105,47 +110,24 @@ async function newgame() {
         console.log(player_deck);
 
         //プレイヤー手札
+        const div = document.createElement("div");
         //imgタグ生成
         const image = document.createElement("img");
-        image.setAttribute('id' , player_deck[i].cards_id);
-        image.setAttribute('class' , i);
+        image.setAttribute('id', player_deck[i].cards_id);
+        image.setAttribute('class', i);
         image.style.width = "120px";  // 幅を300pxに変更
         image.style.height = "200px"; // 高さを300pxに変更
         image.src = player_deck[i].imglink;
-        player_cards.appendChild(image);
+        player_cards.appendChild(div);
+        div.appendChild(image);
+        
+
         player_deck.shift();
         /*絵札test */
-        check();
-        // draw_card();
+        // check();
 
-        let click_cards = [];
-        let click_cnt = 0;
-        image.addEventListener('click',  (e) =>{
-            console.log(e.target.id);
-            const click_card = e.target.id;
-            // click_cards[click_cnt] = click_card;
-            let click_flg = false;
-            for(let k = 0 ; k < click_cnt ; k++){
-                if(click_cards[k] == click_card){
-                    click_flg = true;
-                }
-            }
-
-            const select_card = document.getElementById(click_card);
-            if(click_flg == false){
-                console.log("選択！");
-                click_cards[click_cnt] = click_card;
-                select_card.style.backgroundColor = "red";
-                click_cnt++;
-            }else{
-                console.log("選択解除！");
-                click_cards.shift();
-                select_card.style.backgroundColor = "transparent";
-                click_cnt--;
-            }
-            
-            
-        })
+        //選択カードの情報取得
+        pickup_card(image);
     }
 
 
@@ -241,42 +223,88 @@ function draw_card() {
 }
 
 /***選択カードの情報取得***/
+function pickup_card(image){
+    //カード選択時
+    image.addEventListener('click', (e) => {
+        console.log(e.target.id);
+        const click_card = e.target.id;
+        // click_cards[click_cnt] = click_card;
+        let click_flg = false;
+        for (let k = 0; k < click_cards.length; k++) {
+            console.log(click_cards[k].charAt(1) + " : " + click_card.charAt(1));
+            if (click_cards[k] == click_card || click_cards[k].charAt(1) !== click_card.charAt(1)) {
+                click_flg = true;
+                break;
+            }
+        }
+
+        const select_card = document.getElementById(click_card);
+        if (click_flg == false) {
+            console.log("選択！");
+            click_cards[click_cnt] = click_card;
+            select_card.style.backgroundColor = "red";
+
+            let tmp = Number(click_card.charAt(0));
+            player_sum += tmp;
+            console.log(player_sum);
+            click_cnt++;
+        } else {
+            console.log("選択解除！");
+            click_cards.shift();
+            select_card.style.backgroundColor = "transparent";
+
+            let tmp = Number(click_card.charAt(0));
+            player_sum -= tmp;
+            console.log(player_sum);
+            click_cnt--;
+        }
 
 
-<<<<<<< HEAD
+    })
+
+}
+
+/***同一マーク判定***/
+// function type_check(click_cards){
+    
+// }
+
+
+
+
+
 //担当：武田
 /***絵札Aチェック***/
-function check(){
+function check() {
     console.log("絵札Aのチェックをしました");
-/*if (isFaceCardOrAce(num)) {
-    document.getElementById('result').innerText = `${card}は絵札またはAです！`;
-} else {
-    document.getElementById('result').innerText = `${cardValue}は絵札でもAでもありません。`;
-}
-function card_check(num) {
-    return ['11', '12', '13', '14'].includes(value);
-    console.log("絵札Aのチェックをしました");
-}*/
-}
-=======
-    function pickup_card() {
-        console.log("選択カード情報を取得しました");
->>>>>>> f572fa8b7f2b918a1007b7060a27192b86f5b7c4
-
+    /*if (isFaceCardOrAce(num)) {
+        document.getElementById('result').innerText = `${card}は絵札またはAです！`;
+    } else {
+        document.getElementById('result').innerText = `${cardValue}は絵札でもAでもありません。`;
     }
-
-    //担当：武田
-    /***絵札Aチェック***/
-    function card_check() {
+    function card_check(num) {
+        return ['11', '12', '13', '14'].includes(value);
         console.log("絵札Aのチェックをしました");
-    }
+    }*/
+}
 
-    /***敵山札にカードを戻す***/
-    function return_cpu_deck() {
-        console.log("カードを山札に戻しました");
-    }
 
-    /***敵の捕獲場所にカードを送る***/
-    function send_card() {
-        console.log("カードを敵の捕獲場所に送りました");
-    }
+// function pickup_card() {
+//     console.log("選択カード情報を取得しました");
+// }
+
+//担当：武田
+/***絵札Aチェック***/
+function card_check() {
+    console.log("絵札Aのチェックをしました");
+}
+
+/***敵山札にカードを戻す***/
+function return_cpu_deck() {
+    console.log("カードを山札に戻しました");
+}
+
+/***敵の捕獲場所にカードを送る***/
+function send_card() {
+    console.log("カードを敵の捕獲場所に送りました");
+}
