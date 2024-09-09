@@ -112,6 +112,8 @@ async function newgame() {
 
         //プレイヤー手札
         const div = document.createElement("div");
+        let div_id = "div" + player_deck[i].cards_id;
+        div.setAttribute('id', div_id);
         //imgタグ生成
         const image = document.createElement("img");
         image.setAttribute('id', player_deck[i].cards_id);
@@ -229,7 +231,11 @@ function pickup_card(image){
     image.addEventListener('click', (e) => {
         console.log(e.target.id);
         const click_card = e.target.id;
+        console.log(click_card.charAt(1) + "  " + click_card.charAt(0));
+        let type_tmp = click_card.charAt(1);
+        let num_tmp = click_card.charAt(0); 
         // click_cards[click_cnt] = click_card;
+        // click_cards[click_cnt] = new Card(click_card, type_tmp, num_tmp, "");
         let click_flg = false;
         for (let k = 0; k < click_cards.length; k++) {
             // console.log(click_cards[k].charAt(1) + " : " + click_card.charAt(1));
@@ -241,10 +247,14 @@ function pickup_card(image){
         }
 
         const select_card = document.getElementById(click_card);
+        let tmp = "div" + click_card;
+        let div_id_tmp = document.getElementById(tmp);
         if (click_flg == false && type_flg == true) {
             console.log("選択！");
-            click_cards[click_cnt] = click_card;
-            select_card.style.backgroundColor = "red";
+            // click_cards[click_cnt] = click_card;
+            click_cards[click_cnt] = new Card(click_card, type_tmp, num_tmp, "");
+            // select_card.style.backgroundColor = "red";
+            div_id_tmp.style.backgroundColor = "red";
 
             let tmp = Number(click_card.charAt(0));
             player_sum += tmp;
@@ -268,13 +278,15 @@ function pickup_card(image){
 
 /***同一マーク判定***/
 function type_check(click_cards , click_card){
+    let type_tmp = click_card.charAt(1);
+
     type_flg = true;
     console.log("マークチェック");
     console.log("[" + click_cards + "] " + click_card);
 
     for(let n = 0 ; n < click_cards.length ; n++){
-        if(click_cards[n].charAt(1) !== click_card.charAt(1)){
-            console.log(click_cards[n].charAt(1) + "!=" + click_card.charAt(1) + "マーク違う！");
+        if(click_cards[n].type !== type_tmp ){
+            console.log(click_cards[n].type + "!=" + click_card.charAt(1) + "マーク違う！");
             type_flg = false
             // click_cards.splice(n , 1);
             // console.log("削除しました" + click_cards);

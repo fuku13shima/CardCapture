@@ -10,7 +10,7 @@ body {
 }
 
 .main{
-  display:flex;
+  /* display:flex; */
     justify-content: center;
 
 }
@@ -25,8 +25,12 @@ button{
 
 .player_cards{
   justify-content: center;
+  display: flex;
 }
 
+.player_cards div{
+  padding: 0.25em;
+}
 
 
 
