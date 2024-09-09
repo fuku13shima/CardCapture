@@ -115,10 +115,33 @@ async function newgame() {
         player_deck.shift();
         // draw_card();
 
+        let click_cards = [];
+        let click_cnt = 0;
         image.addEventListener('click',  (e) =>{
             console.log(e.target.id);
             const click_card = e.target.id;
-            click_card.style.background_ = 'green';
+            // click_cards[click_cnt] = click_card;
+            let click_flg = false;
+            for(let k = 0 ; k < click_cnt ; k++){
+                if(click_cards[k] == click_card){
+                    click_flg = true;
+                }
+            }
+
+            const select_card = document.getElementById(click_card);
+            if(click_flg == false){
+                console.log("選択！");
+                click_cards[click_cnt] = click_card;
+                select_card.style.backgroundColor = "red";
+                click_cnt++;
+            }else{
+                console.log("選択解除！");
+                click_cards.shift();
+                select_card.style.backgroundColor = "transparent";
+                click_cnt--;
+            }
+            
+            
         })
     }
 
