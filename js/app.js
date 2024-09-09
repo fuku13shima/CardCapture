@@ -1,7 +1,8 @@
 /*****変数宣言*****/
 //カードデータ
 class Card {
-    constructor(type , num , imglink) {
+    constructor(cards_id ,type , num , imglink) {
+        this.cards_id = cards_id;
         //マーク
         this.type = type;
         //カード番号
@@ -79,12 +80,12 @@ async function newgame() {
                         break;
                 }
 
-                cpu_deck[cpu_cnt] = new Card(tmp_type , tmp_num , imgurl);
+                cpu_deck[cpu_cnt] = new Card(test_draw.cards[i].code , tmp_type , tmp_num , imgurl);
                 cpu_cnt++;
                 // console.log(test_draw.cards[i].code.charAt(0));
             } else {
-                player_deck[player_cnt] = new Card(tmp_type , tmp_num , imgurl);
-                // console.log(player_deck[player_cnt]);
+                player_deck[player_cnt] = new Card(test_draw.cards[i].code , tmp_type , tmp_num , imgurl);
+                console.log(player_deck[player_cnt]);
                 // console.log(player_cnt);
                 player_cnt++;
             }
@@ -105,7 +106,7 @@ async function newgame() {
         //プレイヤー手札
         //imgタグ生成
         const image = document.createElement("img");
-        image.setAttribute('id' , player_deck[i].num + player_deck[i].type);
+        image.setAttribute('id' , player_deck[i].cards_id);
         image.src = player_deck[i].imglink;
         player_cards.appendChild(image);
         player_deck.shift();
