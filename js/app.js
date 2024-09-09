@@ -10,6 +10,10 @@ class Card {
     }
 }
 
+let tmp_num;
+let tmp_type;
+let imgurl; 
+
 //敵山札 , 敵手札配列
 let cpu_deck = [];
 let cpu_hand_cards = [];
@@ -45,9 +49,9 @@ async function newgame() {
         let player_cnt = 0;
         let cpu_cnt = 0;
         for (let i = 0; i < 52; i++) {
-            let tmp_num = test_draw.cards[i].code.charAt(0);
-            let tmp_type = test_draw.cards[i].code.charAt(1);
-            let imgurl = test_draw.cards[i].image;
+            tmp_num = test_draw.cards[i].code.charAt(0);
+            tmp_type = test_draw.cards[i].code.charAt(1);
+            imgurl = test_draw.cards[i].image;
             console.log(tmp_num + "\n" + imgurl);
             // console.log(test_draw.cards[i].code.charAt(0));
             // console.log(test_draw.cards[i].code.charAt(1));
@@ -97,17 +101,17 @@ async function newgame() {
     const player_cards = document.getElementById("player_cards");
     for (let i = 0; i < 4; i++) {
         console.log(player_deck[i]);
-        console.log(player_deck[i].num + " " + player_deck[i].type + "\n" + player_deck[i].imagelink);
-        
-        //imgタグ生成
+        console.log(player_deck[i].num + " " + player_deck[i].type + "\n" + player_deck[i].imglink);
+             
+        //imgタグ生成l
         const image = document.createElement("img");
         image.setAttribute('id' , i);
-        // image.src = player_deck[i].imagelink;
+        image.src = player_deck[i].imglink;
         // image.src = "https://deckofcardsapi.com/static/img/3C.png";
 
         //仮
-        let tmp = player_deck[i].num + player_deck[i].type;
-        image.src = "https://deckofcardsapi.com/static/img/" + tmp + ".png";
+        // let tmp = player_deck[i].num + player_deck[i].type;
+        // image.src = "https://deckofcardsapi.com/static/img/" + tmp + ".png";
 
 
         player_cards.appendChild(image);
