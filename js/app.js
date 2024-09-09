@@ -1,7 +1,8 @@
 /*****変数宣言*****/
 //カードデータ
 class Card {
-    constructor(type , num , imglink) {
+    constructor(cards_id ,type , num , imglink) {
+        this.cards_id = cards_id;
         //マーク
         this.type = type;
         //カード番号
@@ -52,7 +53,7 @@ async function newgame() {
             tmp_num = test_draw.cards[i].code.charAt(0);
             tmp_type = test_draw.cards[i].code.charAt(1);
             imgurl = test_draw.cards[i].image;
-            console.log(tmp_num + "\n" + imgurl);
+            // console.log(tmp_num + "\n" + imgurl);
             // console.log(test_draw.cards[i].code.charAt(0));
             // console.log(test_draw.cards[i].code.charAt(1));
 
@@ -79,12 +80,12 @@ async function newgame() {
                         break;
                 }
 
-                cpu_deck[cpu_cnt] = new Card(tmp_type , tmp_num , imgurl);
+                cpu_deck[cpu_cnt] = new Card(test_draw.cards[i].code , tmp_type , tmp_num , imgurl);
                 cpu_cnt++;
                 // console.log(test_draw.cards[i].code.charAt(0));
             } else {
-                player_deck[player_cnt] = new Card(tmp_type , tmp_num , imgurl);
-                // console.log(player_deck[player_cnt]);
+                player_deck[player_cnt] = new Card(test_draw.cards[i].code , tmp_type , tmp_num , imgurl);
+                console.log(player_deck[player_cnt]);
                 // console.log(player_cnt);
                 player_cnt++;
             }
@@ -95,27 +96,36 @@ async function newgame() {
         console.error("Error fetching data:", error);
     }
 
-    console.log(player_deck[0]);
 
-    //手札４枚出す
+    //プレイヤー手札４枚出す
     const player_cards = document.getElementById("player_cards");
     for (let i = 0; i < 4; i++) {
-        console.log(player_deck[i]);
-        console.log(player_deck[i].num + " " + player_deck[i].type + "\n" + player_deck[i].imglink);
-             
-        //imgタグ生成l
+        console.log("プレイヤードロー 残り：" + player_deck.length);
+        console.log(player_deck);
+
+        //プレイヤー手札
+        //imgタグ生成
         const image = document.createElement("img");
-        image.setAttribute('id' , i);
-        image.setAttribute('class' , i);
+        image.setAttribute('id' , player_deck[i].cards_id);
         image.src = player_deck[i].imglink;
-        // image.src = "https://deckofcardsapi.com/static/img/3C.png";
-
-        //仮
-        // let tmp = player_deck[i].num + player_deck[i].type;
-        // image.src = "https://deckofcardsapi.com/static/img/" + tmp + ".png";
-
-
         player_cards.appendChild(image);
+        player_deck.shift();
+        // draw_card();
+    }
+
+
+    //CPU手札４枚出す
+    // const cpu_cards = document.getElementById("cpu_cards");
+    for (let i = 0; i < 4; i++) {
+        console.log("cpuドロー 残り：" + cpu_deck.length);
+        console.log(cpu_deck);
+        //プレイヤー手札
+        //imgタグ生成
+        // const image = document.createElement("img");
+        // image.setAttribute('id' , cpu_deck[i].num + cpu_deck[i].type);
+        // image.src = cpu_deck[i].imglink;
+        // cpu_cards.appendChild(image);
+        cpu_deck.shift();
         // draw_card();
     }
 
