@@ -29,6 +29,7 @@ let win_flg = false;
 /*****メイン処理*****/
 /***画面読み込み時処理***/
 window.onload = function onLoad() {
+    check();
     newgame();
 }
 
@@ -110,6 +111,8 @@ async function newgame() {
         image.src = player_deck[i].imglink;
         player_cards.appendChild(image);
         player_deck.shift();
+        /*絵札test */
+        check();
         // draw_card();
     }
 
@@ -213,8 +216,17 @@ function pickup_card() {
 
 //担当：武田
 /***絵札Aチェック***/
-function card_check() {
+function check(){
     console.log("絵札Aのチェックをしました");
+/*if (isFaceCardOrAce(num)) {
+    document.getElementById('result').innerText = `${card}は絵札またはAです！`;
+} else {
+    document.getElementById('result').innerText = `${cardValue}は絵札でもAでもありません。`;
+}
+function card_check(num) {
+    return ['11', '12', '13', '14'].includes(value);
+    console.log("絵札Aのチェックをしました");
+}*/
 }
 
 /***敵山札にカードを戻す***/
