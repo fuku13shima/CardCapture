@@ -106,6 +106,7 @@ async function newgame() {
         //imgタグ生成l
         const image = document.createElement("img");
         image.setAttribute('id' , i);
+        image.setAttribute('class' , i);
         image.src = player_deck[i].imglink;
         // image.src = "https://deckofcardsapi.com/static/img/3C.png";
 
