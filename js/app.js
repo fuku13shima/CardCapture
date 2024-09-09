@@ -1,7 +1,7 @@
 /*****変数宣言*****/
 //カードデータ
 class Card {
-    constructor(cards_id ,type , num , imglink) {
+    constructor(cards_id, type, num, imglink) {
         this.cards_id = cards_id;
         //マーク
         this.type = type;
@@ -13,7 +13,7 @@ class Card {
 
 let tmp_num;
 let tmp_type;
-let imgurl; 
+let imgurl;
 
 //敵山札 , 敵手札配列
 let cpu_deck = [];
@@ -80,11 +80,11 @@ async function newgame() {
                         break;
                 }
 
-                cpu_deck[cpu_cnt] = new Card(test_draw.cards[i].code , tmp_type , tmp_num , imgurl);
+                cpu_deck[cpu_cnt] = new Card(test_draw.cards[i].code, tmp_type, tmp_num, imgurl);
                 cpu_cnt++;
                 // console.log(test_draw.cards[i].code.charAt(0));
             } else {
-                player_deck[player_cnt] = new Card(test_draw.cards[i].code , tmp_type , tmp_num , imgurl);
+                player_deck[player_cnt] = new Card(test_draw.cards[i].code, tmp_type, tmp_num, imgurl);
                 console.log(player_deck[player_cnt]);
                 // console.log(player_cnt);
                 player_cnt++;
@@ -114,6 +114,10 @@ async function newgame() {
         player_cards.appendChild(image);
         player_deck.shift();
         // draw_card();
+
+        image.addEventListener('click',  (e) =>{
+            console.log(e.target.id);
+        })
     }
 
 
@@ -209,23 +213,25 @@ function draw_card() {
 }
 
 /***選択カードの情報取得***/
-function pickup_card() {
-    console.log("選択カード情報を取得しました");
 
-}
 
-//担当：武田
-/***絵札Aチェック***/
-function card_check() {
-    console.log("絵札Aのチェックをしました");
-}
+    function pickup_card() {
+        console.log("選択カード情報を取得しました");
 
-/***敵山札にカードを戻す***/
-function return_cpu_deck() {
-    console.log("カードを山札に戻しました");
-}
+    }
 
-/***敵の捕獲場所にカードを送る***/
-function send_card() {
-    console.log("カードを敵の捕獲場所に送りました");
-}
+    //担当：武田
+    /***絵札Aチェック***/
+    function card_check() {
+        console.log("絵札Aのチェックをしました");
+    }
+
+    /***敵山札にカードを戻す***/
+    function return_cpu_deck() {
+        console.log("カードを山札に戻しました");
+    }
+
+    /***敵の捕獲場所にカードを送る***/
+    function send_card() {
+        console.log("カードを敵の捕獲場所に送りました");
+    }
