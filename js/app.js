@@ -98,9 +98,18 @@ async function newgame() {
     for (let i = 0; i < 4; i++) {
         console.log(player_deck[i]);
         console.log(player_deck[i].num + " " + player_deck[i].type + "\n" + player_deck[i].imagelink);
+        
         //imgタグ生成
         const image = document.createElement("img");
-        image.src = player_deck[i].imagelink;
+        image.setAttribute('id' , i);
+        // image.src = player_deck[i].imagelink;
+        // image.src = "https://deckofcardsapi.com/static/img/3C.png";
+
+        //仮
+        let tmp = player_deck[i].num + player_deck[i].type;
+        image.src = "https://deckofcardsapi.com/static/img/" + tmp + ".png";
+
+
         player_cards.appendChild(image);
         // draw_card();
     }
