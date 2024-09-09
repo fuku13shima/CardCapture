@@ -8,3 +8,41 @@ body {
 	background-size: 1380px 650px; /* 幅1380px、高さ650px */
   
 }
+
+.main{
+  display:flex;
+}
+
+.wrapper2{
+  display:flex;
+  justify-content: center;
+
+}
+
+button{
+	margin-top: 100px;
+	width: 120px;
+	height: 50px;
+	font-size:15px;
+	border-radius: 5px;
+}
+
+.enemy_deck{
+  background-color: #dee8f1;
+  border-radius: 8px;
+  padding: 30px;
+  margin-top: 20px;
+  margin-right: 10px;
+  width: 120px;
+  height: 50px;
+}
+
+.enemy_hand {
+  background-color: #dee8f1;
+  border-radius: 8px;
+  padding: 30px;
+  margin-top: 20px;
+  margin-right: 10px;
+  width: 30px;
+  height: 70px;
+}
