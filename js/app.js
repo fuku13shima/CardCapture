@@ -15,17 +15,23 @@ let tmp_num;
 let tmp_type;
 let imgurl;
 
+let click_side = "";
+
 //敵山札 , 敵手札配列
 let cpu_deck = [];
 let cpu_hand_cards = [];
+
+let cpu_sum = 0;
+let cpu_click_cards = [];
 
 //プレイヤー山札 , プレイヤー手札配列
 let player_deck = [];
 let player_hand_cards = [];
 //プレイヤー合計値
 let player_sum = 0;
+let player_click_cards = [];
 
-let click_cards = [];
+// let click_cards = [];
 let cur_cards = [];
 let click_cnt = 0;
 let type_flg = true;
@@ -132,7 +138,8 @@ async function newgame() {
         // check();
 
         //選択カードの情報取得
-        pickup_card(image);
+        click_side = "player";
+        pickup_card(image , player_sum ,click_side);
     }
 
 
@@ -157,7 +164,8 @@ async function newgame() {
         
         cpu_deck.shift();
         //選択カードの情報取得
-        pickup_card(image);
+        click_side = "cpu";
+        pickup_card(image , cpu_sum , click_side);
     }
 
     //敵カード絵札Aチェック
@@ -206,8 +214,7 @@ function cpu_capture() {
     //敵の捕獲場所に移動
     send_card();
 
-    //敵山札にカードを戻す
-    return_cpu_deck();
+    
 }
 
 
@@ -220,6 +227,9 @@ function sacrifice() {
 
     //敵の捕獲場所に移動
     send_card();
+    
+    //敵山札にカードを戻す
+    return_cpu_deck();
 }
 
 
@@ -286,7 +296,14 @@ function trance_num(tmp_num){
 }
 
 /***選択カードの情報取得***/
-function pickup_card(image){
+function pickup_card(image , sum , click_side){
+    let click_cards = [];
+    if(click_side === "player"){
+        click_cards = player_click_cards;
+    }else{
+        click_cards = cpu_click_cards;
+    }
+
     //カード選択時
     image.addEventListener('click', (e) => {
         let type_flg = true;
@@ -309,8 +326,8 @@ function pickup_card(image){
         if(cnt === 0){
             console.log("click_cards.length==0");
             click_cards[cnt] = cur_cards[0];
-            player_sum = Number(cur_cards[0].num);
-            console.log(player_sum);
+            // sum = Number(cur_cards[0].num);
+            console.log(sum);
             // type_flg = true;
 
         }else{   
@@ -330,7 +347,7 @@ function pickup_card(image){
 
             if(type_flg === true){
                 click_cards[cnt] = cur_cards[0];
-                player_sum += Number(cur_cards[0].num);
+                // sum += Number(cur_cards[0].num);
                 
             }else{
                 console.log(click_cards.length)
@@ -342,12 +359,20 @@ function pickup_card(image){
                 }
                 click_cards.splice(0);
                 click_cards[0] = cur_cards[0];
-                player_sum = Number(cur_cards[0].num);
+                // sum = Number(cur_cards[0].num);
                 // div_id_tmp.style.backgroundColor = "red";
             }
+
+            
             console.log(click_cards);
-            console.log(player_sum);
+            
         }
+
+        sum = 0;
+        for(let k = 0 ; k < click_cards.length ;k++){
+            sum += Number(click_cards[k].num);
+        }
+        console.log(sum);
 
     })
 
