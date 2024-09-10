@@ -136,16 +136,24 @@ async function newgame() {
 
 
     //CPU手札４枚出す
-    // const cpu_cards = document.getElementById("cpu_cards");
+    const cpu_cards = document.getElementById("cpu_cards");
     for (let i = 0; i < 4; i++) {
         console.log("cpuドロー 残り：" + cpu_deck.length);
         console.log(cpu_deck);
-        //プレイヤー手札
+        //CPU手札
+        const div = document.createElement("div");
+        let div_id = "div" + cpu_deck[i].cards_id;
+        div.setAttribute('id', div_id);
         //imgタグ生成
-        // const image = document.createElement("img");
-        // image.setAttribute('id' , cpu_deck[i].num + cpu_deck[i].type);
-        // image.src = cpu_deck[i].imglink;
-        // cpu_cards.appendChild(image);
+        const image = document.createElement("img");
+        image.setAttribute('id', cpu_deck[i].cards_id);
+        image.setAttribute('class', i);
+        image.style.width = "120px";  // 幅を300pxに変更
+        image.style.height = "200px"; // 高さを300pxに変更
+        image.src = cpu_deck[i].imglink;
+        cpu_cards.appendChild(div);
+        div.appendChild(image);
+        
         cpu_deck.shift();
         // draw_card();
     }
