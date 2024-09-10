@@ -66,27 +66,28 @@ async function newgame() {
             // console.log(test_draw.cards[i].code.charAt(1));
 
             if (tmp_num !== "2" && tmp_num !== "3" && tmp_num !== "4") {
-                switch (tmp_num) {
-                    case "0":
-                        tmp_num = "10";
-                        break;
+                tmp_num = trance_num(tmp_num);
+                // switch (tmp_num) {
+                //     case "0":
+                //         tmp_num = "10";
+                //         break;
 
-                    case "J":
-                        tmp_num = "11";
-                        break;
+                //     case "J":
+                //         tmp_num = "11";
+                //         break;
 
-                    case "Q":
-                        tmp_num = "12";
-                        break;
+                //     case "Q":
+                //         tmp_num = "12";
+                //         break;
 
-                    case "K":
-                        tmp_num = "13";
-                        break;
+                //     case "K":
+                //         tmp_num = "13";
+                //         break;
 
-                    case "A":
-                        tmp_num = "14";
-                        break;
-                }
+                //     case "A":
+                //         tmp_num = "14";
+                //         break;
+                // }
 
                 cpu_deck[cpu_cnt] = new Card(test_draw.cards[i].code, tmp_type, tmp_num, imgurl);
                 cpu_cnt++;
@@ -155,7 +156,8 @@ async function newgame() {
         div.appendChild(image);
         
         cpu_deck.shift();
-        // draw_card();
+        //選択カードの情報取得
+        pickup_card(image);
     }
 
     //敵カード絵札Aチェック
@@ -255,6 +257,34 @@ function draw_card() {
     console.log("カードを引きました");
 }
 
+/***絵札A0を数値に変換***/
+function trance_num(tmp_num){
+    switch (tmp_num) {
+        case "0":
+            tmp_num = "10";
+            break;
+
+        case "J":
+            tmp_num = "11";
+            break;
+
+        case "Q":
+            tmp_num = "12";
+            break;
+
+        case "K":
+            tmp_num = "13";
+            break;
+
+        case "A":
+            tmp_num = "14";
+            break;
+    }
+
+    return tmp_num;
+
+}
+
 /***選択カードの情報取得***/
 function pickup_card(image){
     //カード選択時
@@ -266,7 +296,9 @@ function pickup_card(image){
         const click_card = e.target.id;
         // console.log(click_card.charAt(1) + "  " + click_card.charAt(0));
 
-        cur_cards[0] = new Card(click_card, click_card.charAt(1), click_card.charAt(0), "");
+        let tmp_num = trance_num(click_card.charAt(0));
+
+        cur_cards[0] = new Card(click_card, click_card.charAt(1), tmp_num, "");
         const select_card = document.getElementById(click_card);
         let tmp = "div" + click_card;
         let div_id_tmp = document.getElementById(tmp);
