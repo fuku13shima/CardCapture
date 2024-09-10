@@ -277,6 +277,8 @@ function pickup_card(image){
         if(cnt === 0){
             console.log("click_cards.length==0");
             click_cards[cnt] = cur_cards[0];
+            player_sum = Number(cur_cards[0].num);
+            console.log(player_sum);
             // type_flg = true;
 
         }else{   
@@ -284,7 +286,9 @@ function pickup_card(image){
                 console.log(click_cards[i].type);
                 if(click_cards[i].type === cur_cards[0].type){
                     console.log("マーク一致");
-                    type_flg = true;
+                    // click_cards[cnt] = cur_cards[0];
+                    
+                    // type_flg = true;
                 }else{
                     console.log("マーク不一致");
                     type_flg = false;
@@ -297,16 +301,17 @@ function pickup_card(image){
                 player_sum += Number(cur_cards[0].num);
                 
             }else{
-                for(let j = 0 ; j < click_cards.length ; j ++){
-                    tmp = "div" + click_cards[j].id;
+                console.log(click_cards.length)
+                for(let j = 0 ; j < click_cards.length ; j++){
+                    tmp = "div" + click_cards[j].cards_id;
                     div_id_tmp = document.getElementById(tmp);
                     console.log(div_id_tmp);
-                    // div_id_tmp.style.backgroundColor = "transparent";
+                    div_id_tmp.style.backgroundColor = "transparent";
                 }
                 click_cards.splice(0);
                 click_cards[0] = cur_cards[0];
                 player_sum = Number(cur_cards[0].num);
-                div_id_tmp.style.backgroundColor = "red";
+                // div_id_tmp.style.backgroundColor = "red";
             }
             console.log(click_cards);
             console.log(player_sum);
