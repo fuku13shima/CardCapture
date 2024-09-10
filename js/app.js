@@ -120,7 +120,7 @@ async function newgame() {
         image.setAttribute('id', player_deck[i].cards_id);
         image.setAttribute('class', i);
         image.style.width = "120px";  // 幅を300pxに変更
-        image.style.height = "200px"; // 高さを300pxに変更
+        image.style.height = "180px"; // 高さを300pxに変更
         image.src = player_deck[i].imglink;
         player_cards.appendChild(div);
         div.appendChild(image);
@@ -149,7 +149,7 @@ async function newgame() {
         image.setAttribute('id', cpu_deck[i].cards_id);
         image.setAttribute('class', i);
         image.style.width = "120px";  // 幅を300pxに変更
-        image.style.height = "200px"; // 高さを300pxに変更
+        image.style.height = "180px"; // 高さを300pxに変更
         image.src = cpu_deck[i].imglink;
         cpu_cards.appendChild(div);
         div.appendChild(image);

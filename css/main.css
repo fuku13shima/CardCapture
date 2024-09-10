@@ -12,11 +12,10 @@ body {
 .main{
   /* display:flex; */
     justify-content: center;
-
 }
 
 .surrender, .enemy{
-	margin-top: 100px;
+	margin-top: 20px;
 	width: 120px;
 	height: 50px;
 	font-size:15px;
@@ -25,13 +24,14 @@ body {
 	margin-left:20px;
 }
 
-.player_cards{
+.player_cards, .cpu_cards{
   justify-content: center;
   display: flex;
 }
 
-.player_cards div{
+.player_cards div, .cpu_cards div{
   padding: 0.25em;
+  margin-bottom: 60px;
 }
 
 
