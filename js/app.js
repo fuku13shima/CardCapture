@@ -112,6 +112,8 @@ async function newgame() {
         console.log("プレイヤードロー 残り：" + player_deck.length);
         console.log(player_deck);
 
+        check(player_deck[i].num, player_deck[i].type);
+
         //プレイヤー手札
         const div = document.createElement("div");
         let div_id = "div" + player_deck[i].cards_id;
@@ -141,6 +143,7 @@ async function newgame() {
     for (let i = 0; i < 4; i++) {
         console.log("cpuドロー 残り：" + cpu_deck.length);
         console.log(cpu_deck);
+        check(cpu_deck[i].num, cpu_deck[i].type);
         //CPU手札
         const div = document.createElement("div");
         let div_id = "div" + cpu_deck[i].cards_id;
@@ -359,17 +362,15 @@ function pickup_card(image){
 
 //担当：武田
 /***絵札Aチェック***/
-function check() {
-    console.log("絵札Aのチェックをしました");
-    /*if (isFaceCardOrAce(num)) {
-        document.getElementById('result').innerText = `${card}は絵札またはAです！`;
-    } else {
-        document.getElementById('result').innerText = `${cardValue}は絵札でもAでもありません。`;
+function check(num, type) {
+    // プレイヤーの手札の数値を表示
+    console.log("チェック中のカードの数値: " + num + type);
+
+    if(num > 10){
+        console.log("このカードは絵札です")
+    }else{
+        console.log("このカードは絵札ではありません")
     }
-    function card_check(num) {
-        return ['11', '12', '13', '14'].includes(value);
-        console.log("絵札Aのチェックをしました");
-    }*/
 }
 
 
