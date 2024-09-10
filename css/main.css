@@ -10,6 +10,9 @@ body {
 }
 
 .main{
+  /* display:flex; */
+    justify-content: center;
+
 }
 
 button{
@@ -21,14 +24,13 @@ button{
 }
 
 .player_cards{
-    display:flex;
-    justify-content: center;
+  justify-content: center;
+  display: flex;
 }
 
-.enemy{
-color: red;
+.player_cards div{
+  padding: 0.25em;
 }
-
 
 /*
 #dialog {

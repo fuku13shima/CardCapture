@@ -4,7 +4,7 @@ body {
  	background-image: url('../image/home_screen.jpg');
 	/*background-size: cover;  画像が縦横比を保ちながら全体を覆う 
 	background-position: center;  画像を中央に配置 */
-  
+
 	background-size: 1380px 650px; /* 幅1380px、高さ650px */
   
 }
