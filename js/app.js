@@ -26,6 +26,7 @@ let player_hand_cards = [];
 let player_sum = 0;
 
 let click_cards = [];
+let cur_cards = [];
 let click_cnt = 0;
 let type_flg = true;
 
@@ -229,69 +230,61 @@ function draw_card() {
 function pickup_card(image){
     //カード選択時
     image.addEventListener('click', (e) => {
+        let type_flg = true;
+        let cnt = click_cards.length;
+
         console.log(e.target.id);
         const click_card = e.target.id;
-        console.log(click_card.charAt(1) + "  " + click_card.charAt(0));
-        let type_tmp = click_card.charAt(1);
-        let num_tmp = click_card.charAt(0); 
-        // click_cards[click_cnt] = click_card;
-        // click_cards[click_cnt] = new Card(click_card, type_tmp, num_tmp, "");
-        let click_flg = false;
-        for (let k = 0; k < click_cards.length; k++) {
-            // console.log(click_cards[k].charAt(1) + " : " + click_card.charAt(1));
-            if (click_cards[k] == click_card) {
-                click_flg = true;
-                // break;
-            }
-            type_check(click_cards , click_card);
-        }
+        // console.log(click_card.charAt(1) + "  " + click_card.charAt(0));
 
+        cur_cards[0] = new Card(click_card, click_card.charAt(1), click_card.charAt(0), "");
         const select_card = document.getElementById(click_card);
         let tmp = "div" + click_card;
         let div_id_tmp = document.getElementById(tmp);
-        if (click_flg == false && type_flg == true) {
-            console.log("選択！");
-            // click_cards[click_cnt] = click_card;
-            click_cards[click_cnt] = new Card(click_card, type_tmp, num_tmp, "");
-            // select_card.style.backgroundColor = "red";
-            div_id_tmp.style.backgroundColor = "red";
+        console.log(div_id_tmp);
+        div_id_tmp.style.backgroundColor = "red";
+        // console.log(click_cards);
 
-            let tmp = Number(click_card.charAt(0));
-            player_sum += tmp;
-            console.log(player_sum);
-            click_cnt++;
-        } else {
-            console.log("選択解除！");
-            click_cards.shift();
-            select_card.style.backgroundColor = "transparent";
+        if(cnt === 0){
+            console.log("click_cards.length==0");
+            click_cards[cnt] = cur_cards[0];
+            // type_flg = true;
 
-            let tmp = Number(click_card.charAt(0));
-            player_sum -= tmp;
+        }else{   
+            for(let i = 0 ; i < cnt ; i++){
+                console.log(click_cards[i].type);
+                if(click_cards[i].type === cur_cards[0].type){
+                    console.log("マーク一致");
+                    type_flg = true;
+                }else{
+                    console.log("マーク不一致");
+                    type_flg = false;
+                    break;
+                }
+            }
+
+            if(type_flg === true){
+                click_cards[cnt] = cur_cards[0];
+                player_sum += Number(cur_cards[0].num);
+                
+            }else{
+                for(let j = 0 ; j < click_cards.length ; j ++){
+                    tmp = "div" + click_cards[j].id;
+                    div_id_tmp = document.getElementById(tmp);
+                    console.log(div_id_tmp);
+                    // div_id_tmp.style.backgroundColor = "transparent";
+                }
+                click_cards.splice(0);
+                click_cards[0] = cur_cards[0];
+                player_sum = Number(cur_cards[0].num);
+                div_id_tmp.style.backgroundColor = "red";
+            }
+            console.log(click_cards);
             console.log(player_sum);
-            click_cnt--;
         }
-
 
     })
 
-}
-
-/***同一マーク判定***/
-function type_check(click_cards , click_card){
-    let type_tmp = click_card.charAt(1);
-
-    type_flg = true;
-    console.log("マークチェック");
-    console.log("[" + click_cards + "] " + click_card);
-
-    for(let n = 0 ; n < click_cards.length ; n++){
-        if(click_cards[n].type !== type_tmp ){
-            console.log(click_cards[n].type + "!=" + click_card.charAt(1) + "マーク違う！");
-            type_flg = false
-            // click_cards.splice(n , 1);
-            // console.log("削除しました" + click_cards);
-        }
-    }
 }
 
 
