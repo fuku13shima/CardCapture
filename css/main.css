@@ -15,12 +15,14 @@ body {
 
 }
 
-button{
+.surrender, .enemy{
 	margin-top: 100px;
 	width: 120px;
 	height: 50px;
 	font-size:15px;
 	border-radius: 5px;
+	margin-right: 20px;
+	margin-left:20px;
 }
 
 .player_cards{
@@ -32,19 +34,6 @@ button{
   padding: 0.25em;
 }
 
-/*
-#dialog {
-    width: 250px;
-    margin: auto;
-    margin-top: 40vh;
-    padding: 30px 20px;
-    display: none;
-    text-align: center;
-    border: 1px solid #aaa;
-    box-shadow: 2px 2px 4px #888;
-    background-color: white;
-}
-*/
 
 /* ダイアログボックスのスタイリング */
 #myDialog {
@@ -54,6 +43,10 @@ button{
   border-radius: 4px;　/* 角丸 */
   box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.4);　/* 影 */
   padding: 0;          /* パディング */
+  position: absolute; /* 装置位置に指定 */
+  top: 50%;           /* 上から50%の位置に配置 */
+  left: 30%;          /* 左から50%の位置に配置 */
+  transform: translate(-50%,-50%);
 }
 /* 背景 */
 #myDialog::backdrop {
@@ -67,7 +60,7 @@ button{
 /* フッタ */
 #myDialog .footer {
   background-color: #fff;
-  text-align: right;
+  text-align: center;
   padding: 1em;
   position: sticky;　/* スクロール時に固定 */
   bottom: 0;
@@ -88,7 +81,9 @@ button{
   color: #fff;
 }
 
-
+#myDialog .inner {
+ /* コンテンツの半分だけ位置を戻して上下左右中央に配置 */
+}
 
 
 .wrapper2{
