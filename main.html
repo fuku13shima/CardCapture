@@ -22,7 +22,24 @@
                     
                 </div>
             </div>
-				<button onclick="location.href='index.html'">初めから</button>
+				<button id="showButton" class="surrender">投了</button>
+				<button onclick="location.href='index.html'" class="enemy">敵からの捕獲</button>
+				<button onclick="location.href='index.html'" class="enemy">生贄</button>
+				
+				
+				<dialog id="myDialog">
+				  <div class="inner">
+				    <div class="body">
+				      <p>本当に投了しますか？</p>
+				    </div>
+				    <div class="footer">
+				      <button class="button ok">はい</button>
+				      <button class="button cancel">キャンセル</button>
+				    </div>
+				  </div>
+				 </dialog>
+				
+				
             <footer></footer>
         </div>
         
