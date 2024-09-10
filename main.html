@@ -27,7 +27,32 @@
                     
                 </div>
             </div>
-				<button onclick="location.href='index.html'">初めから</button>
+            	<!--<div id="dialog">
+				    <p>ボタンをクリックしてください</p>
+				    <button id="yes">はい</button>
+				    <button id="cancel">キャンセル</button>
+				</div>
+				-->
+				<button id="btn">投了</button>
+				<button onclick="location.href='index.html'" class="enemy">敵からの捕獲</button>
+				<button onclick="location.href='index.html'" class="enemy">生贄</button>
+				
+				
+				<dialog id="myDialog">
+				  <div class="inner">
+				    <div class="body">
+				      <p>本当に投了しますか？</p>
+				    </div>
+				    <div class="footer">
+				      <button class="button ok">はい</button>
+				      <button class="button cancel">キャンセル</button>
+				    </div>
+				  </div>
+				 </dialog>
+<button id="showButton">ダイアログを開く</button>
+
+				
+				
             <footer></footer>
         </div>
         

@@ -10,9 +10,6 @@ body {
 }
 
 .main{
-  display:flex;
-    justify-content: center;
-
 }
 
 button{
@@ -24,10 +21,70 @@ button{
 }
 
 .player_cards{
-  justify-content: center;
+    display:flex;
+    justify-content: center;
+}
+
+.enemy{
+color: red;
 }
 
 
+/*
+#dialog {
+    width: 250px;
+    margin: auto;
+    margin-top: 40vh;
+    padding: 30px 20px;
+    display: none;
+    text-align: center;
+    border: 1px solid #aaa;
+    box-shadow: 2px 2px 4px #888;
+    background-color: white;
+}
+*/
+
+/* ダイアログボックスのスタイリング */
+#myDialog {
+  width: 26em;         /* 幅 */
+  max-height: 50%;　   /* 高さ */
+  border: none;　      /* ボーダー */
+  border-radius: 4px;　/* 角丸 */
+  box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.4);　/* 影 */
+  padding: 0;          /* パディング */
+}
+/* 背景 */
+#myDialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4); /* 半透明の黒で覆う */
+}
+/* ボディ */
+#myDialog .body {
+  background-color: #fff;
+  padding: 1em;
+}
+/* フッタ */
+#myDialog .footer {
+  background-color: #fff;
+  text-align: right;
+  padding: 1em;
+  position: sticky;　/* スクロール時に固定 */
+  bottom: 0;
+}
+/* ボタン */
+#myDialog .button {
+  width: 8em;
+  height: 2.4em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#myDialog .button:hover {
+  opacity: 0.8;
+}
+#myDialog .button.ok {
+  background-color: #0075c2;
+  color: #fff;
+}
 
 
 

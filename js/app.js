@@ -199,6 +199,27 @@ function sacrifice() {
 }
 
 
+/***投了確認***/
+ //各要素を変数に代入
+ const dialog = document.querySelector('#myDialog');
+ const okButton = document.querySelector('#myDialog .button.ok');
+ const cancelButton = document.querySelector('#myDialog .button.cancel');
+ const showButton = document.querySelector('#showButton');
+
+ //「ダイアログを開く」ボタンがクリックされたらダイアログを開く
+ showButton.addEventListener('click', function () {
+   dialog.show();
+ });
+ okButton.addEventListener('click', function () {
+    location.href = "index.html"
+  });
+ //「cancel」ボタンがクリックされたらダイアログを閉じる
+ cancelButton.addEventListener('click', function () {
+   dialog.close();
+ });
+
+
+
 /***投了ボタン押下時処理***/
 function give_up() {
     console.log("投了しました");
