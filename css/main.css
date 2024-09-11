@@ -14,7 +14,7 @@ body {
     justify-content: center;
 }
 
-.surrender, .capture, .sacrifice, .cancel, .decision{
+.surrender, .enemy{
 	margin-top: 20px;
 	width: 120px;
 	height: 50px;
@@ -36,47 +36,29 @@ body {
 
 
 /* ダイアログボックスのスタイリング */
-.myDialog{
+#myDialog {
   width: 26em;         /* 幅 */
   max-height: 50%;　   /* 高さ */
   border: none;　      /* ボーダー */
   border-radius: 4px;　/* 角丸 */
   box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.4);　/* 影 */
   padding: 0;          /* パディング */
-}
-
-#myDialog{
   position: absolute; /* 装置位置に指定 */
   top: 50%;           /* 上から50%の位置に配置 */
   left: 30%;          /* 左から50%の位置に配置 */
   transform: translate(-50%,-50%);
 }
-
-#myDialog2{
-  position: absolute; /* 装置位置に指定 */
-  top: 50%;           /* 上から50%の位置に配置 */
-  left: 30%;          /* 左から50%の位置に配置 */
-  transform: translate(-50%,-200%);
-}
-
-#myDialog3{
-  position: absolute; /* 装置位置に指定 */
-  top: 50%;           /* 上から50%の位置に配置 */
-  left: 30%;          /* 左から50%の位置に配置 */
-  transform: translate(-50%,0%);
-}
-
 /* 背景 */
-.myDialog::backdrop {
+#myDialog::backdrop {
   background-color: rgba(0, 0, 0, 0.4); /* 半透明の黒で覆う */
 }
 /* ボディ */
-.myDialog .body {
+#myDialog .body {
   background-color: #fff;
   padding: 1em;
 }
 /* フッタ */
-.myDialog .footer {
+#myDialog .footer {
   background-color: #fff;
   text-align: center;
   padding: 1em;
@@ -84,19 +66,23 @@ body {
   bottom: 0;
 }
 /* ボタン */
-.myDialog .button {
+#myDialog .button {
   width: 8em;
   height: 2.4em;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-.myDialog .button:hover {
+#myDialog .button:hover {
   opacity: 0.8;
 }
-.myDialog .button.ok {
+#myDialog .button.ok {
   background-color: #0075c2;
   color: #fff;
+}
+
+#myDialog .inner {
+ /* コンテンツの半分だけ位置を戻して上下左右中央に配置 */
 }
 
 
@@ -124,8 +110,4 @@ body {
   margin-right: 10px;
   width: 30px;
   height: 70px;
-}
-
-#select_button{
-display:none;
 }

@@ -19,20 +19,12 @@
                 <div id = "player_cards" class="player_cards">
                 </div>
             </div>
-            <div id="menu_button" class="menu_button">
 				<button id="showButton" class="surrender">投了</button>
-				<button id="showButton2" class="capture">敵からの捕獲</button>
-				<button id="showButton3" class="sacrifice" onclick="sacrifice">生贄</button>
-			</div>
+				<button onclick="location.href='index.html'" class="enemy">敵からの捕獲</button>
+				<button onclick="location.href='index.html'" class="enemy">生贄</button>
 				
-			<div id="select_button" class="select_button">
-				<button id="cancel" class="cancel">キャンセル</button>
-				<button class="decision">決定</button>
-			</div>
-			
-			
-				<!--投了選択-->
-				<dialog id="myDialog" class="myDialog">
+				
+				<dialog id="myDialog">
 				  <div class="inner">
 				    <div class="body">
 				      <p>本当に投了しますか？</p>
@@ -40,25 +32,6 @@
 				    <div class="footer">
 				      <button class="button ok">はい</button>
 				      <button class="button cancel">キャンセル</button>
-				    </div>
-				  </div>
-				 </dialog>
-				
-				<!--敵からの捕獲-->
-				<dialog id="myDialog2" class="myDialog">
-				  <div class="inner">
-				    <div class="body">
-				      <p>捕獲されるカードを選択してください</p>
-				    </div>
-				  </div>
-				 </dialog>
-				
-				
-				<!--生贄選択-->
-				<dialog id="myDialog3" class="myDialog">
-				  <div class="inner">
-				    <div class="body">
-				      <p>生贄に出すカードを二枚選択してください</p>
 				    </div>
 				  </div>
 				 </dialog>
