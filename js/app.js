@@ -112,6 +112,9 @@ async function newgame() {
         console.log(player_deck);
 
         //プレイヤー手札
+        const input = document.createElement("input");
+        //input.setAttribute ("type","checkbox");
+        //input.setAttribute ("name","my_hand");
         const div = document.createElement("div");
         let div_id = "div" + player_deck[i].cards_id;
         div.setAttribute('id', div_id);
@@ -124,6 +127,9 @@ async function newgame() {
         image.src = player_deck[i].imglink;
         player_cards.appendChild(div);
         div.appendChild(image);
+        // player_cards.appendChild(input);
+        // input.appendChild(div);
+        // div.appendChild(image);
         
 
         player_deck.shift();
@@ -192,6 +198,22 @@ function player_get() {
 
 }
 
+/***「敵からの捕獲」時処理(試作)***/
+ const dialog2 = document.querySelector('#myDialog2');
+ const showButton2 = document.querySelector('#showButton2');
+ let select_button = document.getElementById('select_button');
+ let menu_button = document.getElementById('menu_button');
+ let flug = 0;
+
+ showButton2.addEventListener('click', function () {
+   dialog2.show();
+   console.log("ボタン切り替え実行");
+    select_button.style.display = 'block';
+    menu_button.style.display = 'none';
+    flug = 1;
+ });
+
+
 
 /***「敵からの捕獲」時処理***/
 function cpu_capture() {
@@ -209,6 +231,31 @@ function cpu_capture() {
 }
 
 
+/***「生贄」時処理(試作)***/
+　const dialog3 = document.querySelector('#myDialog3');
+ const showButton3 = document.querySelector('#showButton3');
+
+ showButton3.addEventListener('click', function () {
+   dialog3.show();
+   select_button.style.display = 'block';
+   menu_button.style.display = 'none';
+   flug = 2;//生贄ボタンか、捕獲ボタンかの識別
+ });
+
+ //「キャンセル」ボタンクリック時
+ let cancel = document.getElementById('cancel');
+ cancel.addEventListener('click', function () {
+    if (flug === 1) {
+        dialog2.close();
+    } else {
+        dialog3.close();
+    }
+    select_button.style.display = 'none';
+    menu_button.style.display = 'block';
+  });
+
+
+
 /***「生贄」時処理***/
 function sacrifice() {
     console.log("生贄フェーズ");
@@ -221,7 +268,7 @@ function sacrifice() {
 }
 
 
-/***投了確認***/
+/***投了ボタン押下時処理***/
  //各要素を変数に代入
  const dialog = document.querySelector('#myDialog');
  const okButton = document.querySelector('#myDialog .button.ok');
@@ -233,19 +280,13 @@ function sacrifice() {
    dialog.show();
  });
  okButton.addEventListener('click', function () {
+    console.log("投了しました");
     location.href = "index.html"
   });
  //「cancel」ボタンがクリックされたらダイアログを閉じる
  cancelButton.addEventListener('click', function () {
    dialog.close();
  });
-
-
-
-/***投了ボタン押下時処理***/
-function give_up() {
-    console.log("投了しました");
-}
 
 
 
