@@ -160,6 +160,8 @@ async function newgame() {
         image.src = cpu_deck[i].imglink;
         cpu_cards.appendChild(div);
         div.appendChild(image);
+        cpu_hand_cards.push(cpu_deck[i]);//相手手札の配列に追加
+        console.log(cpu_hand_cards[cpu_hand_cards.length - 1]);
         
         cpu_deck.shift();
         //選択カードの情報取得
@@ -247,13 +249,21 @@ showButton2.addEventListener('click', function (){
     select_button.style.display = 'none';
     menu_button.style.display = 'block';
     console.log(selectedCard);//クリックしたカードを表示
-    console.log(check(cpu_deck[3].num, cpu_deck[3].type));//絵札か確認してもらう
+    console.log(check(cpu_hand_cards[cpu_hand_cards.length - 1].num, cpu_hand_cards[cpu_hand_cards.length - 1].type));//絵札か確認してもらう
     //console.log(PictureCard_judge);
-    if(check(pu_deck[3].num, cpu_deck[3].type)){
+    if(check(cpu_hand_cards[cpu_hand_cards.length - 1].num, cpu_hand_cards[cpu_hand_cards.length - 1].type)){
         alert('相手の右端のカードが絵札、またはAのため敵からの捕獲ができません');
     }else{
-        send_card();
+        send_card();//捕獲場所に送る
+        let cardId = "div" + cpu_hand_cards[cpu_hand_cards.length - 1].cards_id;
+        let cardDiv = document.getElementById(cardId);
 
+        // div要素をDOMから削除
+        if (cardDiv) {
+            cardDiv.remove(); // 要素を削除
+        }
+        cpu_hand_cards.pop();//手札の配列から削除
+        console.log(cpu_hand_cards.length);
     }
   });
 
