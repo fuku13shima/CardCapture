@@ -1,38 +1,109 @@
 body {
 	text-align: center;
-	
- 	background-image: url('../image/home_screen.jpg');
-	/*background-size: cover;  画像が縦横比を保ちながら全体を覆う 
-	background-position: center;  画像を中央に配置 */
+	background-image: url('../image/home_screen.jpg');
+	/* background-size: cover;  画像が縦横比を保ちながら全体を覆う */
+	/* background-position: center;  画像を中央に配置 */
 
 	background-size: 1380px 650px; /* 幅1380px、高さ650px */
-  
 }
 
-header{
-	margin-top:100px;
-	margin-bottom:150px;
+header {
+	margin-top: 100px;
+	margin-bottom: 150px;
 	color: white;
-	font-size:100px;
+	font-size: 100px;
 	font-family: "ＭＳ Ｐ明朝";
-	font-weight:bold;
+	font-weight: bold;
 }
 
-a{
+a {
 	width: 120px;
 	height: 50px;
-	font-size:70px;
+	font-size: 70px;
 	color: white;
 	font-family: "ＭＳ Ｐ明朝";
-	font-weight:bold;
-	Text-decoration:none;/*下線をなくす*/
-
+	font-weight: bold;
+	text-decoration: none; /* 下線をなくす */
 }
 
-/*button{
-	width: 120px;
-	height: 50px;
-	font-size:20px;
-	border-radius: 5px;
+#popup {
+	display: none; /* label でコントロールするので input は非表示に */
 }
-*/
+
+.popup-open {
+	cursor: pointer; /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */
+	font-size: 50px;
+	color: white;
+	font-family: "ＭＳ Ｐ明朝";
+	font-weight: bold;
+	margin-top : 35px;
+	display: inline-block;
+}
+
+.popup-overlay {
+	display: none; /* input にチェックが入るまでは非表示に */
+}
+
+#popup:checked ~ .popup-overlay {
+	display: block;
+	z-index: 99999;
+	background-color: #00000070;
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+}
+
+.popup-window {
+	width: 90vw;
+	max-width: 480px; /* ポップアップの最大幅を小さく */
+	height: 70vh;
+	max-height: 400px; /* ポップアップの最大高さを制限 */
+	padding: 20px;
+	background-color: #ffffff;
+	border-radius: 6px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	overflow-y: auto; /* スクロールバーを表示 */
+	position: relative; /* ×ボタンの位置を調整するために relative を指定 */
+}
+
+.popup-text {
+	margin: 0;
+}
+
+.popup-text:not(:last-of-type) {
+	margin-bottom: 1em;
+}
+
+.popup-close {
+	cursor: pointer;
+	position: absolute;
+	top: 10px; /* ポップアップ内の上に配置 */
+	right: 10px; /* ポップアップ内の右に配置 */
+	width: 24px;
+	height: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.popup-close::before,
+.popup-close::after {
+	content: '';
+	position: absolute;
+	width: 16px;
+	height: 2px;
+	background-color: black;
+}
+
+.popup-close::before {
+	transform: rotate(45deg); /* 斜めに45度回転して、1本目の斜線 */
+}
+
+.popup-close::after {
+	transform: rotate(-45deg); /* 反対方向に45度回転して、2本目の斜線 */
+}

@@ -2,6 +2,8 @@
 let selectedCard = null;  // グローバル変数に選択したカード情報を保存
 let selectedCard_type = null;  // グローバル変数に選択したカードのタイプを保存
 let selectedCard_num = null;  // グローバル変数に選択したカードのタイプを保存
+let PictureCard_judge;
+
 
 //カードデータ
 class Card {
@@ -144,7 +146,7 @@ async function newgame() {
     const cpu_cards = document.getElementById("cpu_cards");
     for (let i = 0; i < 4; i++) {
         console.log("cpuドロー 残り：" + cpu_deck.length);
-        console.log(cpu_deck);
+        console.log(cpu_deck);//全てのカードを取得している(配列)
         //CPU手札
         const div = document.createElement("div");
         let div_id = "div" + cpu_deck[i].cards_id;
@@ -245,7 +247,14 @@ showButton2.addEventListener('click', function (){
     select_button.style.display = 'none';
     menu_button.style.display = 'block';
     console.log(selectedCard);//クリックしたカードを表示
-    console.log(check(selectedCard_num, selectedCard_type));//絵札か確認してもらう
+    console.log(check(cpu_deck[3].num, cpu_deck[3].type));//絵札か確認してもらう
+    //console.log(PictureCard_judge);
+    if(check(pu_deck[3].num, cpu_deck[3].type)){
+        alert('相手の右端のカードが絵札、またはAのため敵からの捕獲ができません');
+    }else{
+        send_card();
+
+    }
   });
 
 /***「敵からの捕獲」時処理(決定クリック時)***/
@@ -422,8 +431,12 @@ function check(num, type) {
 
     if(num > 10){
         console.log("このカードは絵札です")
+        PictureCard_judge = true;
+        return PictureCard_judge;
     }else{
         console.log("このカードは絵札ではありません")
+        PictureCard_judge = false;
+        return PictureCard_judge;
     }
     function card_check(num) {
         return ['11', '12', '13', '14'].includes(value);
