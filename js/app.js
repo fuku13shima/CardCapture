@@ -1,12 +1,18 @@
 /*****変数宣言*****/
+let selectedCard = null;  // グローバル変数に選択したカード情報を保存
+let selectedCard_type = null;  // グローバル変数に選択したカードのタイプを保存
+let selectedCard_num = null;  // グローバル変数に選択したカードのタイプを保存
+
 //カードデータ
 class Card {
     constructor(cards_id, type, num, imglink) {
         this.cards_id = cards_id;
         //マーク
         this.type = type;
+        selectedCard_type = type;
         //カード番号
         this.num = num;
+        selectedCard_num = num;
         this.imglink = imglink;
     }
 }
@@ -228,6 +234,19 @@ showButton2.addEventListener('click', function (){
     menu_button.style.display = 'block';
   });
 
+  //「決定」ボタンクリック時
+ let decision = document.getElementById('decision');
+ decision.addEventListener('click', function () {
+    if (flug === 1) {
+        dialog2.close();
+    } else {
+        dialog3.close();
+    }
+    select_button.style.display = 'none';
+    menu_button.style.display = 'block';
+    console.log(selectedCard);//クリックしたカードを表示
+    console.log(check(selectedCard_num, selectedCard_type));//絵札か確認してもらう
+  });
 
 /***「敵からの捕獲」時処理(決定クリック時)***/
 function cpu_capture() {
@@ -329,6 +348,7 @@ function pickup_card(image) {
 
         console.log(e.target.id);//クリックしたカード
         const click_card = e.target.id;
+        selectedCard = click_card;
         let card_found = false;  
         let card_index = -1;     
         let type_flg = true;     
