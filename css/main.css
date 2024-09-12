@@ -36,38 +36,46 @@ body {
 
 
 /* ダイアログボックスのスタイリング */
-.myDialog{
+#myDialog {
   width: 26em;         /* 幅 */
-  max-height: 50%;　   /* 高さ */
-  border: none;　      /* ボーダー */
-  border-radius: 4px;　/* 角丸 */
-  box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.4);　/* 影 */
+  max-height: 50%;   /* 高さ */
+  border: none;      /* ボーダー */
+  border-radius: 4px;/* 角丸 */
+  box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.4);/* 影 */
   padding: 0;          /* パディング */
-}
-
-#myDialog{
   position: absolute; /* 装置位置に指定 */
   top: 50%;           /* 上から50%の位置に配置 */
   left: 30%;          /* 左から50%の位置に配置 */
   transform: translate(-50%,-50%);
 }
 
-#myDialog2{
+#myDialog2 {
+  width: 26em;         /* 幅 */
+  max-height: 50%;   /* 高さ */
+  border: none;      /* ボーダー */
+  border-radius: 4px;/* 角丸 */
+  box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.4);/* 影 */
+  padding: 0;          /* パディング */
   position: absolute; /* 装置位置に指定 */
-  top: 50%;           /* 上から50%の位置に配置 */
+  top: 25%;           /* 上から50%の位置に配置 */
   left: 30%;          /* 左から50%の位置に配置 */
-  transform: translate(-50%,-200%);
+  transform: translate(-50%,-50%);
 }
 
-#myDialog3{
+#myDialog3 {
+  width: 26em;         /* 幅 */
+  max-height: 50%;   /* 高さ */
+  border: none;      /* ボーダー */
+  border-radius: 4px;/* 角丸 */
+  box-shadow: 0 0 24px 4px rgba(0, 0, 0, 0.4);/* 影 */
+  padding: 0;          /* パディング */
   position: absolute; /* 装置位置に指定 */
-  top: 50%;           /* 上から50%の位置に配置 */
+  top: 60%;           /* 上から50%の位置に配置 */
   left: 30%;          /* 左から50%の位置に配置 */
-  transform: translate(-50%,0%);
+  transform: translate(-50%,-50%);
 }
-
 /* 背景 */
-.myDialog::backdrop {
+.myDialog::backdrop{
   background-color: rgba(0, 0, 0, 0.4); /* 半透明の黒で覆う */
 }
 /* ボディ */
@@ -76,22 +84,22 @@ body {
   padding: 1em;
 }
 /* フッタ */
-.myDialog .footer {
+.myDialog .footer{
   background-color: #fff;
   text-align: center;
   padding: 1em;
-  position: sticky;　/* スクロール時に固定 */
-  bottom: 0;
+  position: sticky;/* スクロール時に固定 */
+  /*bottom : 0;*/
 }
 /* ボタン */
-.myDialog .button {
+.myDialog .button{
   width: 8em;
   height: 2.4em;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
-.myDialog .button:hover {
+.myDialog .button:hover{
   opacity: 0.8;
 }
 .myDialog .button.ok {
@@ -99,6 +107,9 @@ body {
   color: #fff;
 }
 
+.select_button{
+  display : none;
+}
 
 .wrapper2{
   display:flex;
@@ -124,8 +135,4 @@ body {
   margin-right: 10px;
   width: 30px;
   height: 70px;
-}
-
-#select_button{
-display:none;
 }

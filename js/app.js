@@ -154,7 +154,8 @@ async function newgame() {
         div.appendChild(image);
         
         cpu_deck.shift();
-        // draw_card();
+        //選択カードの情報取得
+        pickup_card(image);
     }
 
     //敵カード絵札Aチェック
@@ -192,43 +193,20 @@ function player_get() {
 }
 
 /***「敵からの捕獲」時処理(試作)***/
- const dialog2 = document.querySelector('#myDialog2');
- const showButton2 = document.querySelector('#showButton2');
- let select_button = document.getElementById('select_button');
- let menu_button = document.getElementById('menu_button');
- let flug = 0;
+const menu_button = document.getElementById('menu_button');
+const select_button = document.getElementById('select_button');
+const dialog2 = document.getElementById('myDialog2');
+const dialog3 = document.getElementById('myDialog3');
+let flug = 0;
 
- showButton2.addEventListener('click', function () {
-   dialog2.show();
-   console.log("ボタン切り替え実行");
-    select_button.style.display = 'block';
-    menu_button.style.display = 'none';
+showButton2.addEventListener('click', function (){
+    dialog2.show();
+    menu_button.style.display = "none";
+    select_button.style.display = "block"
     flug = 1;
- });
-
-
-
-
-
-
-/***「敵からの捕獲」時処理(決定クリック時)***/
-function cpu_capture() {
-    console.log("敵からの捕獲フェーズ");
-    //敵カード絵札Aチェック
-    card_check();
-
-    //プレイヤーカード選択時
-
-    //敵の捕獲場所に移動
-    send_card();
-
-    //敵山札にカードを戻す
-    return_cpu_deck();
-}
-
+});
 
 /***「生贄」時処理(試作)***/
-　const dialog3 = document.querySelector('#myDialog3');
  const showButton3 = document.querySelector('#showButton3');
 
  showButton3.addEventListener('click', function () {
@@ -251,6 +229,21 @@ function cpu_capture() {
   });
 
 
+/***「敵からの捕獲」時処理(決定クリック時)***/
+function cpu_capture() {
+    console.log("敵からの捕獲フェーズ");
+    //敵カード絵札Aチェック
+    card_check();
+
+    //プレイヤーカード選択時
+
+    //敵の捕獲場所に移動
+    send_card();
+
+    //敵山札にカードを戻す
+    return_cpu_deck();
+}
+
 
 /***「生贄」時処理***/
 function sacrifice() {
@@ -264,19 +257,20 @@ function sacrifice() {
 }
 
 
-/***投了ボタン押下時処理***/
+/***投了確認***/
  //各要素を変数に代入
  const dialog = document.querySelector('#myDialog');
  const okButton = document.querySelector('#myDialog .button.ok');
  const cancelButton = document.querySelector('#myDialog .button.cancel');
  const showButton = document.querySelector('#showButton');
 
+
+
  //「ダイアログを開く」ボタンがクリックされたらダイアログを開く
  showButton.addEventListener('click', function () {
    dialog.show();
  });
  okButton.addEventListener('click', function () {
-    console.log("投了しました");
     location.href = "index.html"
   });
  //「cancel」ボタンがクリックされたらダイアログを閉じる
@@ -286,109 +280,135 @@ function sacrifice() {
 
 
 
+/***投了ボタン押下時処理***/
+function give_up() {
+    console.log("投了しました");
+}
+
+
+
 /*****関数******/
 /***山札からカードを引く***/
 function draw_card() {
     console.log("カードを引きました");
 }
 
+/***絵札A0を数値に変換***/
+function trance_num(tmp_num){
+    switch (tmp_num) {
+        case "0":
+            tmp_num = "10";
+            break;
+
+        case "J":
+            tmp_num = "11";
+            break;
+
+        case "Q":
+            tmp_num = "12";
+            break;
+
+        case "K":
+            tmp_num = "13";
+            break;
+
+        case "A":
+            tmp_num = "14";
+            break;
+    }
+
+    return tmp_num;
+
+}
+
 /***選択カードの情報取得***/
-function pickup_card(image){
+function pickup_card(image) {
     //カード選択時
     image.addEventListener('click', (e) => {
-        let type_flg = true;
         let cnt = click_cards.length;
 
         console.log(e.target.id);//クリックしたカード
         const click_card = e.target.id;
-        // console.log(click_card.charAt(1) + "  " + click_card.charAt(0));
+        let card_found = false;  
+        let card_index = -1;     
+        let type_flg = true;     
 
-        cur_cards[0] = new Card(click_card, click_card.charAt(1), click_card.charAt(0), "");
+        for (let i = 0; i < click_cards.length; i++) {
+            if (click_cards[i].cards_id === click_card) {
+                card_found = true;
+                card_index = i;
+                break;
+            }
+        }
+
+        let tmp_num = trance_num(click_card.charAt(0));
+        cur_cards[0] = new Card(click_card, click_card.charAt(1), tmp_num, "");
+
         const select_card = document.getElementById(click_card);
         let tmp = "div" + click_card;
         let div_id_tmp = document.getElementById(tmp);
-        console.log(div_id_tmp);
-        div_id_tmp.style.backgroundColor = "red";
-        // console.log(click_cards);
 
-        
-            /***「敵からの捕獲」時処理(試作)***/
-let decision = document.getElementById('decision');
-decision.addEventListener('click', function () {
-    return(click_card);
-
-})
-
-        if(cnt === 0){
-            console.log("click_cards.length==0");
-            click_cards[cnt] = cur_cards[0];
-            player_sum = Number(cur_cards[0].num);
-            console.log(player_sum);//クリックしたカードの合計
-            // type_flg = true;
-
-        }else{   
-            for(let i = 0 ; i < cnt ; i++){
-                console.log(click_cards[i].type);//トランプのマーク
-                if(click_cards[i].type === cur_cards[0].type){
-                    console.log("マーク一致");
-                    // click_cards[cnt] = cur_cards[0];
-                    
-                    // type_flg = true;
-                }else{
-                    console.log("マーク不一致");
-                    type_flg = false;
-                    break;
+        if (card_found) {
+            div_id_tmp.style.backgroundColor = "transparent";  
+            player_sum -= Number(click_cards[card_index].num);  
+            click_cards.splice(card_index, 1);  
+        } else {
+            if (cnt > 0) {
+                for (let i = 0; i < cnt; i++) {
+                    if (click_cards[i].type !== cur_cards[0].type) {
+                        type_flg = false;
+                        break;
+                    }
                 }
             }
 
-            if(type_flg === true){
-                click_cards[cnt] = cur_cards[0];
-                player_sum += Number(cur_cards[0].num);
-                
-            }else{
-                console.log(click_cards.length)
-                for(let j = 0 ; j < click_cards.length ; j++){
-                    tmp = "div" + click_cards[j].cards_id;
-                    div_id_tmp = document.getElementById(tmp);
-                    console.log(div_id_tmp);//カード情報(idや背景色)
-                    div_id_tmp.style.backgroundColor = "transparent";
+            if (type_flg) {
+                console.log("マーク一致");
+                div_id_tmp.style.backgroundColor = "red"; 
+                click_cards.push(cur_cards[0]);  
+                player_sum += Number(cur_cards[0].num);  
+            } else {
+                console.log("マーク不一致");
+                for (let j = 0; j < click_cards.length; j++) {
+                    let reset_tmp = "div" + click_cards[j].cards_id;
+                    let reset_div = document.getElementById(reset_tmp);
+                    reset_div.style.backgroundColor = "transparent";  
                 }
-                click_cards.splice(0);
-                click_cards[0] = cur_cards[0];
-                player_sum = Number(cur_cards[0].num);
-                // div_id_tmp.style.backgroundColor = "red";
+                click_cards.splice(0);  
+                click_cards.push(cur_cards[0]);  
+                player_sum = Number(cur_cards[0].num);  
+                div_id_tmp.style.backgroundColor = "red";  
             }
-            console.log(click_cards);
-            console.log(player_sum);
         }
 
-    })
-
+        console.log(click_cards);
+        console.log( player_sum);
+    });
 }
 
 
-            /***「敵からの捕獲」時処理(試作)***/
-let decision = document.getElementById('decision');
-decision.addEventListener('click', function () {
-    console.log(click_card+"!!!!!!!!!!!!!!!!!!!!!!!!!!!");//クリックしたカード
-    console.log(e.target.id);
 
-})
+
+
+
+
 
 
 //担当：武田
 /***絵札Aチェック***/
-function check() {
-    console.log("絵札Aのチェックをしました");
-    /*if (isFaceCardOrAce(num)) {
-        document.getElementById('result').innerText = `${card}は絵札またはAです！`;
-    } else {
-        document.getElementById('result').innerText = `${cardValue}は絵札でもAでもありません。`;
+function check(num, type) {
+    // プレイヤーの手札の数値を表示
+    console.log("チェック中のカードの数値: " + num + type);
+
+    if(num > 10){
+        console.log("このカードは絵札です")
+    }else{
+        console.log("このカードは絵札ではありません")
     }
     function card_check(num) {
         return ['11', '12', '13', '14'].includes(value);
         console.log("絵札Aのチェックをしました");
-    }*/
+    }
 }
 
 
